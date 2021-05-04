@@ -5,14 +5,24 @@ const nocache = require("nocache");
 const expect = require("chai");
 const socket = require("socket.io");
 const http = require("http");
+const cors = require("cors");
 
 const fccTestingRoutes = require("./routes/fcctesting.js");
 const runner = require("./test-runner.js");
 
 const app = express();
+app.use(cors({ origin: "*" }));
 
 app.use(helmet.noSniff());
 app.use(nocache());
+app.use(function (req, res, next) {
+	res.setHeader("x-powered-by", "PHP 7.4.3");
+	next();
+});
+app.use(function (req, res, next) {
+	res.setHeader("x-xss-protection", "1; mode=block");
+	next();
+});
 app.use(
 	"/public",
 	express.static(process.cwd() + "/public")
@@ -24,14 +34,7 @@ app.use(
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(function (req, res, next) {
-	res.setHeader("x-powered-by", "PHP 7.4.3");
-	next();
-});
-app.use(function (req, res, next) {
-	res.setHeader("x-xss-protection", "1; mode=block");
-	next();
-});
+
 // Index page (static HTML)
 app.route("/").get(function (req, res) {
 	res.sendFile(process.cwd() + "/views/index.html");
