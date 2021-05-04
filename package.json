@@ -8,22 +8,23 @@
     "test": "PORT=3005 mocha --require @babel/register --recursive --exit --ui tdd tests/"
   },
   "dependencies": {
-    "@babel/core": "^7.7.5",
-    "@babel/preset-env": "^7.7.6",
-    "@babel/register": "^7.7.4",
+    "@babel/core": "^7.14.0",
+    "@babel/preset-env": "^7.14.0",
+    "@babel/register": "^7.13.16",
     "body-parser": "^1.19.0",
-    "chai": "^4.2.0",
+    "chai": "^4.3.4",
     "chai-http": "^4.3.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "helmet": "^3.21.3",
-    "jsdom": "^16.2.0",
-    "mocha": "^7.1.0",
+    "helmet": "^4.6.0",
+    "http": "*",
+    "jsdom": "^16.5.3",
+    "mocha": "^8.3.2",
     "nocache": "^2.1.0",
-    "nodemon": "^2.0.2",
-    "socket.io": "^2.3.0",
-    "socket.io-client": "^2.3.0"
+    "nodemon": "^2.0.7",
+    "socket.io": "^4.0.1",
+    "socket.io-client": "^4.0.1"
   },
   "license": "MIT"
 }

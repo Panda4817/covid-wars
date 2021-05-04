@@ -1,5 +1,7 @@
 body {
   margin: 20px;
+  font-family: 'Press Start 2P', cursive;
+  text-align: center;
 }
 
 code {
@@ -14,9 +16,21 @@ canvas {
   display: flex;
   flex-direction: column;
 }
+.footer {
+  padding: 20px;
+}
 
 @media (min-width: 800px) {
   .container {
     flex-direction: row;
+  }
+  .mobile-msg {
+    display: none;
+  }
+}
+
+@media (max-width: 799px) {
+  .mobile-msg {
+    display: block;
   }
 }
