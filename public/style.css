@@ -2,10 +2,8 @@ body {
   margin: 20px;
   font-family: 'Press Start 2P', cursive;
   text-align: center;
-}
-
-code {
-  background: #d0d0d5;
+  background-color: black;
+  color: white;
 }
 
 canvas {

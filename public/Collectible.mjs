@@ -2,9 +2,9 @@ class Collectible {
 	constructor({
 		x = 10,
 		y = 10,
-		w = 15,
-		h = 15,
-		value = 1,
+		w = 25,
+		h = 25,
+		value = 10,
 		id,
 	}) {
 		this.x = x;

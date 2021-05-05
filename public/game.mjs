@@ -82,7 +82,7 @@ const update = () => {
 	context.clearRect(0, 0, canvas.width, canvas.height);
 
 	// Set background color
-	context.fillStyle = "#220";
+	context.fillStyle = "#000";
 	context.fillRect(0, 0, canvas.width, canvas.height);
 
 	// Create border for play field

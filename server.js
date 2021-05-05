@@ -72,6 +72,7 @@ const {
 	generateStartPos,
 	canvasCalcs,
 } = require("./public/canvas-data");
+const { cpuUsage } = require("process");
 const io = socket(server);
 
 const random = (min, max) => {
@@ -99,9 +100,9 @@ let current_players = [];
 let vaccine = new Collectible({
 	x: vaccineX,
 	y: vaccineY,
-	w: 15,
-	h: 15,
-	value: 1,
+	w: 25,
+	h: 25,
+	value: 10,
 	id: new Date(),
 });
 let [virusX, virusY] = getRandomPosition();
@@ -124,7 +125,7 @@ io.on("connection", (socket) => {
 		h: 30,
 		bw: 90,
 		bh: 90,
-		score: 10,
+		score: 100,
 		id: socket.id,
 	});
 	current_players.push(player);
@@ -177,14 +178,8 @@ const tick = () => {
 				player.id !== other.id &&
 				player.bubble_collision(other)
 			) {
-				[positionX, positionY] = getRandomPosition();
-				player.x = positionX;
-				player.y = positionY;
-				player.score -= 1;
-				[positionX, positionY] = getRandomPosition();
-				other.x = positionX;
-				other.y = positionY;
-				other.score -= 1;
+				player.score -= 0.5;
+				other.score -= 0.5;
 				playerUpdate.push(player);
 				playerUpdate.push(other);
 			}
@@ -192,11 +187,17 @@ const tick = () => {
 
 		let p = new Player(player);
 		if (virus.collision(p)) {
-			let [positionX, positionY] = getRandomPosition();
-			player.x = positionX;
-			player.y = positionY;
 			player.score -= virus.score;
 			playerUpdate.push(player);
+			let [virusX, virusY] = getRandomPosition();
+			virus = new Player({
+				x: virusX,
+				y: virusY,
+				w: 30,
+				h: 30,
+				score: 2,
+				id: Date.now(),
+			});
 		}
 		p = new Player(player);
 		if (p.collision(vaccine)) {
@@ -207,7 +208,7 @@ const tick = () => {
 				y: vaccineY,
 				w: 25,
 				h: 25,
-				value: 1,
+				value: 10,
 				id: new Date(),
 			});
 			playerUpdate.push(player);
